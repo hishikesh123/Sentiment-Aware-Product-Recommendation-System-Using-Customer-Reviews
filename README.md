@@ -1,82 +1,128 @@
-🧠 Assignment 3 – NLP Clothing Reviews Web Application
-📘 Description
+# Sentiment-Aware Product Recommendation System  
+**Machine Learning | NLP | Applied Data Science**
 
-This project applies Natural Language Processing (NLP) techniques to analyze clothing reviews and display them through a Flask web interface.
-Users can browse clothing items, view descriptions and ratings, add new reviews, and search for products based on similarity using TF-IDF.
-The application integrates text preprocessing, feature representation, and basic recommendation filtering.
+## Project Summary
+This project demonstrates an **end-to-end machine learning pipeline** that integrates **sentiment analysis of customer reviews** into a product recommendation workflow. It focuses on transforming **unstructured text data** into **actionable signals** that enhance recommendation quality.
 
-📂 Project Structure
-File / Folder	Description
-assignment3.csv	Dataset containing clothing reviews and product metadata
-stopwords_en.txt	English stopword list used in preprocessing
-templates/	HTML templates for Flask (base.html, index.html, details.html, etc.)
-static/	CSS, JS, and image files
-app.py	Main Flask application
-requirements.txt	Python dependencies
-vocab.txt	Alphabetically sorted unigram vocabulary (generated after preprocessing)
-count_vectors.txt	Count vector representations (generated after preprocessing)
-🧹 Text Preprocessing Steps
+The repository follows **production-oriented ML engineering practices**, with a clear separation between data processing, feature engineering, training, and evaluation. To keep the repository lightweight and maintainable, trained model artifacts are stored externally.
 
-Convert all text to lowercase
+---
 
-Remove punctuation, digits, and special symbols using regex
+## Problem Statement
+Conventional recommendation systems often rely primarily on ratings or interaction data. This project explores how **sentiment extracted from textual reviews** can:
+- Better capture nuanced user preferences  
+- Improve recommendations in cold-start scenarios  
+- Enrich feature representations for ranking or recommendation tasks  
 
-Tokenize the text into individual words
+---
 
-Remove stopwords from stopwords_en.txt
+## Technical Approach
 
-Generate vocab.txt and count_vectors.txt
+### Data Processing
+- Text cleaning, normalization, and tokenization  
+- Stopword handling and reproducible preprocessing steps  
 
-Optionally, build weighted TF-IDF or embedding-based document vectors
+### Feature Engineering
+- TF-IDF and/or embedding-based representations  
+- Sentiment-aware feature construction  
+- Modular design to support experimentation  
 
-🚀 How to Run the Web Application
-1️⃣ Create & Activate a Virtual Environment (Recommended)
+### Modeling
+- Supervised sentiment classification  
+- Interpretable, efficient ML models  
+- Clear separation between training and inference logic  
 
-Using Conda:
+### Evaluation
+- Standard classification metrics  
+- Focus on robustness and generalization  
 
-conda create -n projectFlask python=3.12
-conda activate projectFlask
+---
 
+## Repository Structure
+```text
+├── data/                  # Sample or processed datasets
+├── notebooks/             # EDA and experimentation
+├── src/                   # Production-style source code
+│   ├── preprocessing.py   # Text cleaning & normalization
+│   ├── features.py        # Feature engineering
+│   ├── train.py           # Model training pipeline
+│   └── evaluate.py        # Evaluation & metrics
+├── requirements.txt       # Reproducible dependencies
+└── README.md              # Project documentation
+````
 
-Or using venv:
+---
 
-python -m venv venv
-source venv/bin/activate      # macOS/Linux
-venv\Scripts\activate         # Windows
+## Trained Models (External Storage)
 
-2️⃣ Install Dependencies
+To follow **best practices for ML repositories**, trained model files are **not committed to GitHub**.
+
+📦 **Download trained models here:**
+[ADD GOOGLE DRIVE LINK HERE]
+
+After downloading, place the files locally in:
+
+```text
+models/
+```
+
+All scripts are configured to load models from this directory.
+
+---
+
+## How to Run
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+```
+
+### 2. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-3️⃣ Start the Flask Server
-python app.py
+### 3. Run the pipeline
 
+```bash
+python src/preprocessing.py
+python src/train.py
+python src/evaluate.py
+```
 
-If successful, you’ll see output similar to:
+---
 
-* Running on http://127.0.0.1:5000/
+## What This Project Demonstrates to Recruiters
 
-4️⃣ Open the Webpage
+* Practical application of **NLP in recommender systems**
+* Clean, maintainable **ML code structure**
+* Awareness of **model versioning and repository hygiene**
+* Ability to move from **raw text → features → trained models**
+* Engineering decisions aligned with **real-world constraints**
 
-Visit http://127.0.0.1:5000/
- in your browser.
+---
 
-🏠 Homepage: Displays clothing items and descriptions
+## Future Improvements
 
-🔍 Search Bar: Find products by keyword similarity (TF-IDF)
+* Integration with collaborative filtering or ranking models
+* API deployment using FastAPI or Flask
+* Experiment tracking with MLflow
+* Model monitoring and drift detection
 
-💬 Details Page: Read and add reviews for individual items
+---
 
-📤 Outputs (Generated During Tasks)
+## Author
 
-vocab.txt → Alphabetically sorted unigram vocabulary
+**Hishikesh Phukan**
+Master of Data Science
+GitHub: [https://github.com/hishikesh123](https://github.com/hishikesh123)
 
-count_vectors.txt → Bag-of-Words representation of reviews
+---
 
-weighted_vectors.txt (optional) → TF-IDF or embedding-based representations
+## License
 
-👨‍💻 Author
+Academic and portfolio use only.
 
-Hishikesh Phukan (s4031214)
-Master of Data Science, RMIT University
-
-📅 October 2025
