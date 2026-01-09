@@ -58,7 +58,7 @@ Conventional recommendation systems often rely primarily on ratings or interacti
 To follow **best practices for ML repositories**, trained model files are **not committed to GitHub**.
 
 📦 **Download trained models here:**
-[ADD GOOGLE DRIVE LINK HERE]
+https://rmiteduau-my.sharepoint.com/:f:/g/personal/s4031214_student_rmit_edu_au/IgDjnh6Wud1YQ7uHDrnTAbxBAdWStvtgYy45o3v0o6VC8AA?e=hhw1bS  (send me an email for the password)
 
 After downloading, place the files locally in:
 
