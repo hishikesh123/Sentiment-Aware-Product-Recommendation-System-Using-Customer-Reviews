@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="card">
+    <h2>Review saved</h2>
+    <p><strong>Item:</strong> 
+      <a href="{{ url_for('item_detail', item_id=item['item_id']) }}">{{ item["Clothes Title"] }}</a>
+    </p>
+    <p><strong>Title:</strong> {{ review["title"] or "(no title)" }}</p>
+    <p><strong>Description:</strong> {{ review["description"] }}</p>
+    <p><strong>Rating:</strong> {{ review["rating"] or "N/A" }}</p>
+    <p><strong>Label:</strong> 
+       {{ "Recommended" if review["label"]==1 else "Not Recommended" }}</p>
+    <p><a class="btn" href="{{ url_for('item_detail', item_id=item['item_id']) }}">Back to item</a></p>
+  </div>
+{% endblock %}

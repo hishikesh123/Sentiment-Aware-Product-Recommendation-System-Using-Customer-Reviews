@@ -1,0 +1,11 @@
+# Machine learning models (stored externally)
+models/
+*.npy
+*.bin
+*.model
+*.vec
+*.ckpt
+models/
+*.npy
+*.bin
+*.pkl

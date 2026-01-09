@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RMIT Clothing Shop</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #ffffff;
+        color: #222;
+        margin: 0;
+      }
+
+      /* HEADER */
+      header {
+        background: #fff;
+        border-bottom: 1px solid #e5e5e5;
+        padding: 12px 24px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo a {
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.4rem;
+        color: #000;
+        letter-spacing: 0.5px;
+      }
+
+      /* SEARCH BAR */
+      .search-form {
+        display: flex;
+        align-items: center;
+        width: 50%;
+      }
+
+      .search-form input[type="text"] {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px 0 0 4px;
+        font-size: 14px;
+      }
+
+      .search-form button {
+        padding: 10px 16px;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .search-form button:hover {
+        background-color: #333;
+      }
+
+      /* MAIN CONTENT */
+      .container {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 0 24px;
+      }
+
+      .card {
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 20px;
+        background: #fff;
+        transition: box-shadow 0.3s;
+      }
+
+      .card:hover {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+
+      a {
+        color: #000;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .btn {
+        display: inline-block;
+        background: #000;
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.2s;
+      }
+
+      .btn:hover {
+        background: #333;
+      }
+
+      /* BRAND LOGO */
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+
+      .brand-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+
+      .brand-text {
+        font-weight: 700;
+        font-size: 1.4rem;
+        color: #000;
+        letter-spacing: 0.5px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+        justify-content: center;
+      }
+
+      .product-img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        border-radius: 10px;
+        background-color: #f8f8f8;
+      }
+
+      /* FLASH MESSAGES */
+      .flash {
+        padding: 12px 14px;
+        border-radius: 8px;
+        margin-bottom: 12px;
+      }
+
+      .flash.info { background: #dbeafe; color: #1e3a8a; }
+      .flash.success { background: #dcfce7; color: #166534; }
+      .flash.warning { background: #fef9c3; color: #854d0e; }
+
+      footer {
+        text-align: center;
+        padding: 30px;
+        color: #777;
+        border-top: 1px solid #eee;
+        margin-top: 50px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="navbar">
+       <div class="logo">
+        <a href="{{ url_for('home') }}" class="brand">
+          <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="brand-logo">
+          <span class="brand-text">RMIT Clothing Shop</span>
+        </a>
+      </div>
+      <form method="get" action="{{ url_for('home') }}" class="search-form">
+          <input type="text" name="q" placeholder="Search dresses, coats, jeans..." value="{{ query or '' }}">
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    </header>
+
+
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+      © 2025 RMIT Clothing Shop. All rights reserved.
+    </footer>
+  </body>
+</html>

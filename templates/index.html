@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="display:flex; justify-content:space-between; align-items:center;">
+  <div class="toggle-buttons">
+    <a href="{{ url_for('home', view='featured') }}" class="toggle-btn {% if view=='featured' %}active{% endif %}">Featured</a>
+    <a href="{{ url_for('home', view='category') }}" class="toggle-btn {% if view=='category' %}active{% endif %}">Categories</a>
+  </div>
+</div>
+
+<hr>
+
+{% if view == 'featured' %}
+  <div class="grid">
+    {% for it in items %}
+    <div class="card">
+      <h3><a href="{{ url_for('item_page', item_id=it['item_id']) }}">{{ it['Clothes Title'] }}</a></h3>
+      <p>{{ it['Clothes Description'][:140] }}{% if it['Clothes Description']|length > 140 %}...{% endif %}</p>
+      {% if it["avg_rating"] %}
+        <p>⭐ {{ it["avg_rating"] }} / 5</p>
+      {% else %}
+        <p>⭐ No ratings yet</p>
+      {% endif %}
+      {% if it['Image'] %}
+      <img src="{{ url_for('static', filename='images/' + it['Image']) }}" width="200">
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+{% elif view == 'category' %}
+  <ul>
+    {% for c in items %}
+    <li>
+      <a href="{{ url_for('category_page', cat=c) }}">{{ c }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<style>
+.toggle-buttons {
+  display: flex;
+  gap: 10px;
+}
+.toggle-btn {
+  padding: 8px 16px;
+  background: #1f2937;
+  border-radius: 6px;
+  color: #e5e7eb;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.toggle-btn:hover {
+  background: #2563eb;
+  color: white;
+}
+.toggle-btn.active {
+  background: #2563eb;
+  color: white;
+  box-shadow: 0 0 6px #2563eb;
+}
+</style>
+
+{% endblock %}

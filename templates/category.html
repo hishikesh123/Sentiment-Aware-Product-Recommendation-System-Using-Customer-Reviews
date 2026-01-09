@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Category: {{ category }}</h2>
+  <div class="grid">
+    {% for it in items %}
+    <div class="card">
+      <h3><a href="{{ url_for('item_page', item_id=it['item_id']) }}">{{ it['Clothes Title'] }}</a></h3>
+      <p>{{ it['Clothes Description'][:150] }}{% if it['Clothes Description']|length > 150 %}...{% endif %}</p>
+      {% if it['Image'] %}
+      <img src="{{ url_for('static', filename='images/' + it['Image']) }}" width="200">
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}
