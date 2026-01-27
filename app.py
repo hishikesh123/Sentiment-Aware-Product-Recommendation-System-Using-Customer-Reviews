@@ -7,12 +7,16 @@ from models.review_pipeline import predict_label
 import os
 
 app = Flask(__name__)
-app.secret_key = "dev-key"
+app.secret_key = os.environ.get("SECRET_KEY", "dev-key")
 
 # ---------------- Paths ----------------
 DATA_PATH = Path("data/assignment3_II.csv")
-REVIEWS_PATH = Path("data/reviews.json")
-image_dir = "static/images"
+INSTANCE_DIR = Path(app.instance_path)
+INSTANCE_DIR.mkdir(parents=True, exist_ok=True)
+REVIEWS_PATH = INSTANCE_DIR / "reviews.json"
+image_dir = Path("static/images")
+image_files = os.listdir(image_dir) if image_dir.exists() else []
+
 
 # ---------------- Load data ----------------
 items = pd.read_csv(DATA_PATH)
@@ -251,4 +255,6 @@ def show_review(review_id):
     return render_template("review_show.html", review=review, item=item)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
+
