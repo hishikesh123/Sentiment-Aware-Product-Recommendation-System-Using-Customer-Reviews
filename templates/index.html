@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div style="display:flex; justify-content:space-between; align-items:center;">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
   <div class="toggle-buttons">
     <a href="{{ url_for('home', view='featured') }}" class="toggle-btn {% if view=='featured' %}active{% endif %}">Featured</a>
     <a href="{{ url_for('home', view='category') }}" class="toggle-btn {% if view=='category' %}active{% endif %}">Categories</a>
@@ -14,28 +14,28 @@
   <div class="grid">
     {% for it in items %}
     <div class="card">
-      <h3><a href="{{ url_for('item_page', item_id=it['item_id']) }}">{{ it['Clothes Title'] }}</a></h3>
-      <p>{{ it['Clothes Description'][:140] }}{% if it['Clothes Description']|length > 140 %}...{% endif %}</p>
-      {% if it["avg_rating"] %}
-        <p>⭐ {{ it["avg_rating"] }} / 5</p>
-      {% else %}
-        <p>⭐ No ratings yet</p>
-      {% endif %}
       {% if it['Image'] %}
-      <img src="{{ url_for('static', filename='images/' + it['Image']) }}" width="200">
+      <img src="{{ url_for('static', filename='images/' + it['Image']) }}" alt="{{ it['Clothes Title'] }}" class="product-img">
+      {% endif %}
+      <h3 style="margin:12px 0 6px;"><a href="{{ url_for('item_page', item_id=it['item_id']) }}">{{ it['Clothes Title'] }}</a></h3>
+      <p style="font-size:14px; color:#555; margin:0 0 8px;">{{ it['Clothes Description'][:140] }}{% if it['Clothes Description']|length > 140 %}...{% endif %}</p>
+      {% if it["avg_rating"] %}
+        <p style="margin:0;">⭐ {{ it["avg_rating"] }} / 5</p>
+      {% else %}
+        <p style="margin:0; color:#aaa;">⭐ No ratings yet</p>
       {% endif %}
     </div>
     {% endfor %}
   </div>
 
 {% elif view == 'category' %}
-  <ul>
+  <div class="grid">
     {% for c in items %}
-    <li>
-      <a href="{{ url_for('category_page', cat=c) }}">{{ c }}</a>
-    </li>
+    <a href="{{ url_for('category_page', cat=c) }}" class="card" style="display:block; text-align:center; padding:24px 16px; text-decoration:none;">
+      <div style="font-size:1.1rem; font-weight:600;">{{ c }}</div>
+    </a>
     {% endfor %}
-  </ul>
+  </div>
 {% endif %}
 
 <style>
@@ -54,6 +54,7 @@
 .toggle-btn:hover {
   background: #2563eb;
   color: white;
+  text-decoration: none;
 }
 .toggle-btn.active {
   background: #2563eb;
