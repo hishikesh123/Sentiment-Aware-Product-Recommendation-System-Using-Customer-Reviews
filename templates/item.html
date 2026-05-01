@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
   <div class="card">
+    {% if item['Image'] %}
+    <img src="{{ url_for('static', filename='images/' + item['Image']) }}" alt="{{ item['Clothes Title'] }}" class="product-img" style="margin-bottom:16px;">
+    {% endif %}
     <h2 style="margin-top:0">{{ item["Clothes Title"] }}</h2>
     <p>{{ item["Clothes Description"] }}</p>
     <p><strong>Category:</strong> {{ item.get("Category","—") }}</p>
@@ -10,32 +13,32 @@
       <p><strong>⭐ Average Rating:</strong> No ratings yet</p>
     {% endif %}
     <a class="btn" href="{{ url_for('new_review', item_id=item['item_id']) }}">➕ Add Review</a>
-  
   </div>
 
- <div class="card">
-  <h3>Reviews</h3>
+  <div class="card">
+    <h3>Reviews</h3>
 
-  {% if reviews %}
-    {% for r in reviews %}
-      <div style="padding:10px 0; border-bottom:1px solid #1f2937;">
-        <strong>{{ r["title"] or "(no title)" }}</strong><br>
-        <div style="opacity:0.85;">{{ r["description"] }}</div>
-        <div>
-          <small>
-            Rating: {{ r["rating"] or "N/A" }} |
+    {% if reviews %}
+      {% for r in reviews %}
+        <div style="padding:12px 0; border-bottom:1px solid #e5e5e5;">
+          <strong>{{ r["title"] or "(no title)" }}</strong><br>
+          <div style="margin:4px 0; color:#444;">{{ r["description"] }}</div>
+          <div style="margin-top:6px;">
+            <small style="color:#666;">Rating: {{ r["rating"] or "N/A" }}</small>
+            &nbsp;
             {% if r["label"] == "Dataset" %}
-              <b>Source: Dataset</b>
+              <span class="badge badge-gray">Dataset Review</span>
+            {% elif r["label"] == 1 %}
+              <span class="badge badge-green">✓ Recommended</span>
             {% else %}
-              Label: <b>{{ "Recommended" if r["label"]==1 else "Not Recommended" }}</b>
+              <span class="badge badge-red">✗ Not Recommended</span>
             {% endif %}
-          </small>
+          </div>
         </div>
-      </div>
-    {% endfor %}
-  {% else %}
-    <p>No reviews yet. Be the first to add one!</p>
-  {% endif %}
-
-  <br>
+      {% endfor %}
+    {% else %}
+      <p>No reviews yet. Be the first to add one!</p>
+    {% endif %}
+    <br>
+  </div>
 {% endblock %}
